@@ -1,41 +1,37 @@
-﻿using System;
+﻿using InventoryApplication;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Documents;
 using System.Windows.Forms;
 
-namespace InventoryApplication
+namespace RegistrationAndLogin
 {
-    public partial class BillingList : Form
+    public partial class StockList : Form
     {
         private SqlDataAdapter dataAdapter = new SqlDataAdapter();
         private DataTable table = new DataTable();
 
         SqlConnection cn;
 
-        public BillingList()
+        public StockList()
         {
             InitializeComponent();
         }
 
-        private void BillingList_Load(object sender, EventArgs e)
+        private void StockList_Load(object sender, EventArgs e)
         {
+
             cn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=C:\Users\Admin\Downloads\InventoryApplication\InventoryApplication\Database.mdf;Integrated Security=True");
             cn.Open();
             GetData();
-            if (Login.isManager)
-            {
-                btnViewInventory.Show();
-            }
-            else
-            {
-                btnViewInventory.Hide();
-            }
         }
 
 
@@ -43,14 +39,14 @@ namespace InventoryApplication
         {
             try
             {
-                dataAdapter = new SqlDataAdapter("select * from Billing_List", cn);
+                dataAdapter = new SqlDataAdapter("select * from Item_List", cn);
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
                 table = new DataTable();
                 dataAdapter.Fill(table);
-                dataGridBillView1.DataSource = table;
-                dataGridBillView1.Columns["Id"].Visible = false;
-                dataGridBillView1.AllowUserToAddRows = false;
-                dataGridBillView1.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 9.75F, FontStyle.Bold);
+                dataGridStockView1.DataSource = table;
+                dataGridStockView1.Columns["Id"].Visible = false;
+                dataGridStockView1.AllowUserToAddRows = false;
+                dataGridStockView1.ColumnHeadersDefaultCellStyle.Font = new Font("Tahoma", 9.75F, FontStyle.Bold);
 
             }
             catch (SqlException)
@@ -60,8 +56,7 @@ namespace InventoryApplication
 
         }
 
-
-        private void dataGridBillView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridStockView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

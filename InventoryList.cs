@@ -8,6 +8,7 @@ using System.Windows.Documents;
 using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
+using RegistrationAndLogin;
 
 namespace InventoryApplication
 {
@@ -174,6 +175,20 @@ namespace InventoryApplication
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            StockList stockList = new StockList();
+            stockList.ShowDialog();
+        }
+
+        private void btnBilling_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BillingList billingList = new BillingList();
+            billingList.ShowDialog();
         }
     }
 }
